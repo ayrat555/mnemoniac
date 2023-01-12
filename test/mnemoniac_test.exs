@@ -1,5 +1,6 @@
 defmodule MnemoniacTest do
   use ExUnit.Case
+  doctest Mnemoniac
 
   alias Cryptopunk.Key
   alias Cryptopunk.Seed

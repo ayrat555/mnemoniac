@@ -4,17 +4,20 @@
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `mnemoniac` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `mnemoniac` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:mnemoniac, "~> 0.1.0"}
+    {:mnemoniac, "~> 0.1"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/mnemoniac>.
+## Docs
+
+The docs can be found at [https://hexdocs.pm/mnemoniac](https://hexdocs.pm/mnemoniac)
+
+## Author
+
+Ayrat Badykov (@ayrat555)

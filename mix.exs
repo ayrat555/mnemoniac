@@ -7,7 +7,13 @@ defmodule Mnemoniac.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      description: "Mnemonic generation according to the BIP-39 standard",
+      package: [
+        maintainers: ["Ayrat Badykov"],
+        licenses: ["MIT"],
+        links: %{"GitHub" => "https://github.com/ayrat555/mnemoniac"}
+      ]
     ]
   end
 

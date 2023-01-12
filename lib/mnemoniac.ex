@@ -14,6 +14,24 @@ defmodule Mnemoniac do
          |> Stream.map(&String.trim/1)
          |> Enum.to_list()
 
+  @doc """
+  Create a random mnemonic with the provided number of words. By default, the number of words is 24.
+  Allowed numbers of words are 12, 15, 18, 24
+
+  ## Examples
+
+      iex> {:ok, mnemonic} = Mnemoniac.create_mnemonic()
+      iex> mnemonic |> String.split(" ") |> Enum.count()
+      24
+
+      iex> {:ok, mnemonic} = Mnemoniac.create_mnemonic(12)
+      iex> mnemonic |> String.split(" ") |> Enum.count()
+      12
+
+      iex> Mnemoniac.create_mnemonic(10)
+      {:error, :invalid_number}
+  """
+
   @spec create_mnemonic(non_neg_integer()) :: {:ok, String.t()} | {:error, :invalid_number}
   def create_mnemonic(word_number \\ Enum.max(@word_numbers))
 
@@ -32,6 +50,22 @@ defmodule Mnemoniac do
     {:ok, mnemonic}
   end
 
+  @doc """
+  Similar to `create_mnemonic/1`, but fails the number of words is not supported
+
+  ## Examples
+
+      iex> mnemonic = Mnemoniac.create_mnemonic!()
+      iex> mnemonic |> String.split(" ") |> Enum.count()
+      24
+
+      iex> mnemonic = Mnemoniac.create_mnemonic!(12)
+      iex> mnemonic |> String.split(" ") |> Enum.count()
+      12
+
+      iex> Mnemoniac.create_mnemonic!(10)
+      ** (ArgumentError) Number of words 10 is not supported, please use one of the [12, 15, 18, 21, 24]
+  """
   @spec create_mnemonic!(non_neg_integer()) :: String.t() | no_return()
   def create_mnemonic!(word_number \\ Enum.max(@word_numbers)) do
     case create_mnemonic(word_number) do
@@ -45,6 +79,20 @@ defmodule Mnemoniac do
     end
   end
 
+  @doc """
+  Create a mnemonic from entropy. The supported byte sizes are 16, 20, 24, 32
+
+  ## Examples
+
+      iex> Mnemoniac.create_mnemonic_from_entropy(<<6, 197, 169, 93, 98, 210, 82, 216, 148, 177, 1, 251, 142, 15, 154, 85, 140, 0, 13, 202,234, 160, 129, 218>>)
+      {:ok, "almost coil firm shield cement hobby fan cage wine idea track prison scale alone close favorite limb still"}
+
+      iex> Mnemoniac.create_mnemonic_from_entropy(<<6, 197, 169, 93, 98, 210, 82, 216, 148, 177, 1, 251, 142, 15, 154, 85, 140, 0, 13, 202,234, 160, 129, 218, 6, 197, 169, 93, 98, 210, 82, 216>>)
+      {:ok, "almost coil firm shield cement hobby fan cage wine idea track prison scale alone close favorite limb south ramp famous stomach hard enter author"}
+
+      iex> Mnemoniac.create_mnemonic_from_entropy(<<1>>)
+      {:error, :invalid_entropy}
+  """
   @spec create_mnemonic_from_entropy(binary()) :: {:ok, String.t()} | {:error, :invalid_entropy}
   def create_mnemonic_from_entropy(entropy) do
     found_entropy_bits =
@@ -63,6 +111,17 @@ defmodule Mnemoniac do
     end
   end
 
+  @doc """
+  Similar to `create_mnemonic_from_entropy/1`, but fails the entropy has unsupported byte size
+
+  ## Examples
+
+      iex> Mnemoniac.create_mnemonic_from_entropy!(<<6, 197, 169, 93, 98, 210, 82, 216, 148, 177, 1, 251, 142, 15, 154, 85, 140, 0, 13, 202,234, 160, 129, 218>>)
+      "almost coil firm shield cement hobby fan cage wine idea track prison scale alone close favorite limb still"
+
+      iex> Mnemoniac.create_mnemonic_from_entropy!(<<1>>)
+      ** (ArgumentError) Entropy size is invalid
+  """
   @spec create_mnemonic_from_entropy!(binary()) :: String.t() | no_return
   def create_mnemonic_from_entropy!(entropy) do
     case create_mnemonic_from_entropy(entropy) do
@@ -75,15 +134,27 @@ defmodule Mnemoniac do
     end
   end
 
+  @doc """
+  Return all 2048 words used for mnemonic generation
+  """
   @spec words() :: [String.t()]
   def words, do: @words
 
+  @doc """
+  Return a map of word numbers to entropy bits.
+  """
   @spec word_numbers_to_entropy_bits() :: %{non_neg_integer() => non_neg_integer()}
   def word_numbers_to_entropy_bits, do: @word_numbers_to_entropy_bits
 
+  @doc """
+  Return supported numbers of words that can be used for mnemonic generation
+  """
   @spec word_numbers() :: [non_neg_integer()]
   def word_numbers, do: @word_numbers
 
+  @doc """
+  Return supported entopy bit sizes
+  """
   @spec entropy_bit_sizes() :: [non_neg_integer()]
   def entropy_bit_sizes, do: @entropy_bits_sizes
 
