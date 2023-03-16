@@ -4,7 +4,15 @@ defmodule Mnemoniac do
 
   See https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
   """
-  @word_numbers_to_entropy_bits %{3 => 32, 6 => 64, 12 => 128, 15 => 160, 18 => 192, 21 => 224, 24 => 256}
+  @word_numbers_to_entropy_bits %{
+    3 => 32,
+    6 => 64,
+    12 => 128,
+    15 => 160,
+    18 => 192,
+    21 => 224,
+    24 => 256
+  }
   @word_numbers Map.keys(@word_numbers_to_entropy_bits)
   @entropy_bits_sizes Map.values(@word_numbers_to_entropy_bits)
   @words :mnemoniac
