@@ -7,7 +7,7 @@ defmodule MnemoniacTest do
 
   describe "create_mnemonic/1" do
     test "creates mnemonics of different sizes" do
-      Enum.each([12, 15, 18, 21, 24], fn number_of_words ->
+      Enum.each([3, 6, 12, 15, 18, 21, 24], fn number_of_words ->
         assert {:ok, mnemonic} = Mnemoniac.create_mnemonic(number_of_words)
 
         assert number_of_words == count_words(mnemonic)
@@ -35,14 +35,14 @@ defmodule MnemoniacTest do
 
     test "fails on invalid word count" do
       assert_raise ArgumentError,
-                   "Number of words 10 is not supported, please use one of the [12, 15, 18, 21, 24]",
+                   "Number of words 10 is not supported, please use one of the [3, 6, 12, 15, 18, 21, 24]",
                    fn ->
                      Mnemoniac.create_mnemonic!(10)
                    end
     end
 
     test "creates mnemonics of different sizes" do
-      Enum.each([12, 15, 18, 21, 24], fn number_of_words ->
+      Enum.each([3, 6, 12, 15, 18, 21, 24], fn number_of_words ->
         assert number_of_words ==
                  number_of_words
                  |> Mnemoniac.create_mnemonic!()
@@ -119,20 +119,20 @@ defmodule MnemoniacTest do
 
   describe "word_numbers_to_entropy_bits/0" do
     test "returns a map of word numbers to entropy bits" do
-      assert %{12 => 128, 15 => 160, 18 => 192, 21 => 224, 24 => 256} ==
+      assert %{3 => 32, 6 => 64, 12 => 128, 15 => 160, 18 => 192, 21 => 224, 24 => 256} ==
                Mnemoniac.word_numbers_to_entropy_bits()
     end
   end
 
   describe "word_numbers/0" do
     test "returns a list of supported word numbers in mnemonic" do
-      assert [12, 15, 18, 21, 24] == Mnemoniac.word_numbers()
+      assert [3, 6, 12, 15, 18, 21, 24] == Mnemoniac.word_numbers()
     end
   end
 
   describe "entopy_bit_sizes/0" do
     test "returns supported entopy bit sizes" do
-      assert [128, 160, 192, 224, 256] == Mnemoniac.entropy_bit_sizes()
+      assert [32, 64, 128, 160, 192, 224, 256] == Mnemoniac.entropy_bit_sizes()
     end
   end
 

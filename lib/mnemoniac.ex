@@ -4,7 +4,15 @@ defmodule Mnemoniac do
 
   See https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
   """
-  @word_numbers_to_entropy_bits %{12 => 128, 15 => 160, 18 => 192, 21 => 224, 24 => 256}
+  @word_numbers_to_entropy_bits %{
+    3 => 32,
+    6 => 64,
+    12 => 128,
+    15 => 160,
+    18 => 192,
+    21 => 224,
+    24 => 256
+  }
   @word_numbers Map.keys(@word_numbers_to_entropy_bits)
   @entropy_bits_sizes Map.values(@word_numbers_to_entropy_bits)
   @words :mnemoniac
@@ -16,7 +24,7 @@ defmodule Mnemoniac do
 
   @doc """
   Create a random mnemonic with the provided number of words. By default, the number of words is 24.
-  Allowed numbers of words are 12, 15, 18, 24
+  Allowed numbers of words are 3, 6, 12, 15, 18, 24
 
   ## Examples
 
@@ -64,7 +72,7 @@ defmodule Mnemoniac do
       12
 
       iex> Mnemoniac.create_mnemonic!(10)
-      ** (ArgumentError) Number of words 10 is not supported, please use one of the [12, 15, 18, 21, 24]
+      ** (ArgumentError) Number of words 10 is not supported, please use one of the [3, 6, 12, 15, 18, 21, 24]
   """
   @spec create_mnemonic!(non_neg_integer()) :: String.t() | no_return()
   def create_mnemonic!(word_number \\ Enum.max(@word_numbers)) do
