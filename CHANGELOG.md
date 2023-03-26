@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2023-03-26)
+
+  * Add `crypto` to extra_applications ([#6](https://github.com/ayrat555/mnemoniac/pull/6))
+
 ## 0.1.1 (2023-03-16)
 
   * Support 3 and 6 word mnemonics ([#3](https://github.com/ayrat555/mnemoniac/pull/3))
