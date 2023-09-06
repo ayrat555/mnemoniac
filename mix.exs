@@ -9,6 +9,7 @@ defmodule Mnemoniac.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: "Mnemonic generation according to the BIP-39 standard",
+      elixirc_paths: elixirc_paths(Mix.env()),
       package: [
         maintainers: ["Ayrat Badykov"],
         licenses: ["MIT"],
@@ -16,6 +17,10 @@ defmodule Mnemoniac.MixProject do
       ]
     ]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Run "mix help compile.app" to learn about applications.
   def application do
@@ -27,10 +32,12 @@ defmodule Mnemoniac.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:cryptopunk, "~> 0.6.6", only: :test},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:ex_pbkdf2, "~> 0.8.1", only: [:test]},
+      {:ex_secp256k1, "~> 0.7.2", only: [:test]},
+      {:ex_base58, "~> 0.6.1", only: [:test]}
     ]
   end
 end
