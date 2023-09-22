@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 (2023-09-22)
+
+  * Mnemonic validation logic ([#13](https://github.com/ayrat555/mnemoniac/pull/13))
+
 ## 0.1.2 (2023-03-26)
 
   * Add `crypto` to extra_applications ([#6](https://github.com/ayrat555/mnemoniac/pull/6))
