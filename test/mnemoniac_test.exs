@@ -136,6 +136,53 @@ defmodule MnemoniacTest do
     end
   end
 
+  describe "valid_mnemonic?/2" do
+    test "validates string" do
+      mnemonic = "kitten hint pipe dream expand clap video used voyage pole soft rabbit"
+
+      assert Mnemoniac.valid_mnemonic?(mnemonic)
+    end
+
+    test "validates list" do
+      mnemonic = [
+        "dinner",
+        "equal",
+        "access",
+        "end",
+        "chimney",
+        "goddess",
+        "admit",
+        "differ",
+        "advance",
+        "waste",
+        "journey",
+        "current",
+        "local",
+        "blue",
+        "pull"
+      ]
+
+      assert Mnemoniac.valid_mnemonic?(mnemonic)
+    end
+
+    test "invalidates mnemonic with invalid size" do
+      mnemonic = [
+        "dinner",
+        "equal",
+        "access",
+        "end"
+      ]
+
+      refute Mnemoniac.valid_mnemonic?(mnemonic)
+    end
+
+    test "invalidates mnemonic with invalid words" do
+      mnemonic = "crypto kitten pipe dream expand clap video used voyage pole soft rabbit"
+
+      refute Mnemoniac.valid_mnemonic?(mnemonic)
+    end
+  end
+
   defp count_words(mnemonic) do
     mnemonic
     |> String.split(" ")
