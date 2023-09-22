@@ -13,6 +13,8 @@ defmodule Mnemoniac do
     21 => 224,
     24 => 256
   }
+
+  @valid_words_count [12, 15, 18, 21, 24]
   @word_numbers Map.keys(@word_numbers_to_entropy_bits)
   @entropy_bits_sizes Map.values(@word_numbers_to_entropy_bits)
   @words :mnemoniac
@@ -166,6 +168,34 @@ defmodule Mnemoniac do
   @spec entropy_bit_sizes() :: [non_neg_integer()]
   def entropy_bit_sizes, do: @entropy_bits_sizes
 
+  @doc """
+  Validates a mnemonic
+
+  ## Examples
+
+      iex> Mnemoniac.valid_mnemonic?("leaf bitter canoe cat decade aim history cricket sniff subject culture diamond liberty forest voice thing limb lounge close winner fine cake catalog silent")
+      true
+
+      iex> Mnemoniac.valid_mnemonic?("word")
+      false
+
+      iex> Mnemoniac.valid_mnemonic?(["muffin", "play", "hurt", "fee", "trip", "crack", "doll", "expose", "make", "social", "learn", "lesson"])
+      true
+  """
+
+  @spec valid_mnemonic?(String.t() | [String.t()], non_neg_integer() | nil) :: boolean()
+  def valid_mnemonic?(mnemonic, number_of_words \\ nil)
+
+  def valid_mnemonic?(mnemonic, number_of_words) when is_binary(mnemonic) do
+    mnemonic_words = String.split(mnemonic, " ")
+
+    valid_mnemonic?(mnemonic_words, number_of_words)
+  end
+
+  def valid_mnemonic?(mnemonic_words, number_of_words) do
+    correct_mnemonic_size?(mnemonic_words, number_of_words) && correct_words?(mnemonic_words)
+  end
+
   defp do_create_from_entropy(entropy, entropy_bits) do
     entropy
     |> append_checksum(entropy_bits)
@@ -192,5 +222,19 @@ defmodule Mnemoniac do
       end
 
     Enum.join(words, " ")
+  end
+
+  defp correct_mnemonic_size?(words, mnemonic_size) do
+    words_count = Enum.count(words)
+
+    if is_nil(mnemonic_size) do
+      words_count in @valid_words_count
+    else
+      words_count == mnemonic_size
+    end
+  end
+
+  defp correct_words?(words) do
+    Enum.all?(words, fn word -> word in words() end)
   end
 end
