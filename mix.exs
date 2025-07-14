@@ -35,9 +35,9 @@ defmodule Mnemoniac.MixProject do
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:ex_pbkdf2, "~> 0.8.1", only: [:test]},
-      {:ex_secp256k1, "~> 0.7.2", only: [:test]},
-      {:ex_base58, "~> 0.6.1", only: [:test]}
+      {:ex_pbkdf2, "~> 0.8.4", only: [:test]},
+      {:ex_secp256k1, "~> 0.7.5", only: [:test]},
+      {:ex_base58, "~> 0.6.4", only: [:test]}
     ]
   end
 end
