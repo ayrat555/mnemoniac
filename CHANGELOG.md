@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4 (2025-07-14)
+
+  * Update deps ([#24](https://github.com/ayrat555/mnemoniac/pull/24))
+
 ## 0.1.3 (2023-09-22)
 
   * Mnemonic validation logic ([#13](https://github.com/ayrat555/mnemoniac/pull/13))
