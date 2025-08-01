@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5 (2025-08-01)
+
+  * Update deps to support older linux systems ([#29](https://github.com/ayrat555/mnemoniac/pull/29))
+
 ## 0.1.4 (2025-07-14)
 
   * Update deps ([#24](https://github.com/ayrat555/mnemoniac/pull/24))
