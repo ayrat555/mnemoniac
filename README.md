@@ -9,7 +9,7 @@ The package can be installed by adding `mnemoniac` to your list of dependencies 
 ```elixir
 def deps do
   [
-    {:mnemoniac, "~> 0.1.4"}
+    {:mnemoniac, "~> 0.1.5"}
   ]
 end
 ```
