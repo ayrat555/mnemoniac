@@ -36,7 +36,7 @@ defmodule Mnemoniac.MixProject do
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:ex_pbkdf2, "~> 0.8.5", only: [:test]},
-      {:ex_secp256k1, "~> 0.7.6", only: [:test]},
+      {:ex_secp256k1, "~> 0.8.0", only: [:test]},
       {:ex_base58, "~> 0.6.5", only: [:test]}
     ]
   end
